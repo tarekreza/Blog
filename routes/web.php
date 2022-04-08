@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[WelcomeController::class,'index'])->name('welcome.index');
 // to blog page
 Route::get('/blog',[BlogController::class,'index'])->name('blog.index');
+// to create blog post
+Route::get('/blog/create',[BlogController::class,'create'])->name('blog.create');
 //to single blog post
 Route::get('/blog/single-blog-post',[BlogController::class,'show'])->name('blog.show');
 //to about page
