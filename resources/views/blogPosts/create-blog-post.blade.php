@@ -1,5 +1,10 @@
 @extends('layout.layout')
 
+@section('head')
+     {{-- for html editor --}}
+     <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+@endsection
+
 @section('main')
 <main class="container" style="background-color: #fff;">
     <section id="contact-us">
@@ -23,4 +28,11 @@
         </div>
     </section>
 </main>
+@endsection
+
+@section('scripts')
+        {{-- for html editor --}}
+        <script>
+            CKEDITOR.replace( 'body' );
+    </script>
 @endsection
