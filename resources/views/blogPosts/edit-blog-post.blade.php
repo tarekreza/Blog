@@ -8,18 +8,19 @@
 @section('main')
 <main class="container" style="background-color: #fff;">
     <section id="contact-us">
-        <h1 style="padding-top: 50px;">Create New Post!</h1>
+        <h1 style="padding-top: 50px;">Edit Post!</h1>
 
         @if (session('status'))
         <p>{{ session('status') }}</p>
         @endif
         {{-- contact form --}}
         <div class="contact-form">
-            <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('blog.store', $post) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 {{-- Title --}}
                 <label for="title"><span>Title</span></label>
-                <input type="text" id="title" name="title" value="{{ old('title') }}" />
+                <input type="text" id="title" name="title" value="{{ $post->title }}" />
                 {{-- title validation --}}
                 @error('title')
                 <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
@@ -35,7 +36,7 @@
 
                 {{-- Body --}}
                 <label for="body"><span>Body</span></label>
-                <textarea id="body" name="body">{{ old('body') }}</textarea>
+                <textarea id="body" name="body">{{ $post->body }}</textarea>
                 {{-- body validation --}}
                 @error('body')
                 <p style="color: red; margin-bottom: 25px">{{ $message }}</p>

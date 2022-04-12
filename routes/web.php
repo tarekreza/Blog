@@ -10,9 +10,17 @@ Route::get('/',[WelcomeController::class,'index'])->name('welcome.index');
 // to blog page
 Route::get('/blog',[BlogController::class,'index'])->name('blog.index');
 // to create blog post
-Route::get('/blog/create',[BlogController::class,'create'])->name('blog.create');
+Route::get('/blog/create',[BlogController::class,'create'])->name('blog.create')->middleware('auth');
+// to store blog post
+Route::post('/blog',[BlogController::class,'store'])->name('blog.store');
 //to single blog post
-Route::get('/blog/single-blog-post',[BlogController::class,'show'])->name('blog.show');
+Route::get('/blog/{post:slug}',[BlogController::class,'show'])->name('blog.show');
+//to edit single blog post
+Route::get('/blog/{post}/edit',[BlogController::class,'edit'])->name('blog.edit');
+//to update single blog post
+Route::put('/blog/{post}',[BlogController::class,'update'])->name('blog.update');
+//to delete single blog post
+Route::delete('/blog/{post}',[BlogController::class,'delete'])->name('blog.delete');
 //to about page
 Route::get('/about', function(){
     return view('about');
