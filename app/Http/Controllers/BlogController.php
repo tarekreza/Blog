@@ -13,17 +13,17 @@ class BlogController extends Controller
     // {
     //     $this->middleware('auth')->except(['index']);
     // }
-    
+
     // for show blog post
     public function index(Request $request)
     {
-        //for search
+        //for search and pagination
         if ($request->search) {
-            $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->get();
+            $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->paginate(4);
         }
         else{
             
-            $posts = Post::latest()->get();
+            $posts = Post::latest()->paginate(4);
         }
         return view('blogPosts.blog', compact('posts'));
     }
