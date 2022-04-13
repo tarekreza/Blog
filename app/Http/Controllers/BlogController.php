@@ -13,16 +13,26 @@ class BlogController extends Controller
     // {
     //     $this->middleware('auth')->except(['index']);
     // }
-
-    public function index()
+    
+    // for show blog post
+    public function index(Request $request)
     {
-        $posts = Post::latest()->get();
+        //for search
+        if ($request->search) {
+            $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->get();
+        }
+        else{
+            
+            $posts = Post::latest()->get();
+        }
         return view('blogPosts.blog', compact('posts'));
     }
+    // for create single post
     public function create()
     {
         return view('blogPosts.create-blog-post');
     }
+        // for store single post
     public function store(Request $request)
     {
         $request->validate([
@@ -52,6 +62,7 @@ class BlogController extends Controller
 
         return redirect()->back()->with('status', 'Post created successfully');
     }
+        // for edit single post
     public function edit(Post $post)
     {
         if(auth()->user()->id !== $post->user->id){
@@ -59,6 +70,7 @@ class BlogController extends Controller
         }
         return view('blogPosts.edit-blog-post', compact('post'));
     }
+        // for update single post
     public function update(Request $request , Post $post)
     {
         if(auth()->user()->id !== $post->user->id){
@@ -93,11 +105,13 @@ class BlogController extends Controller
     // }
 
     // Route model binding
+        // for show single post
     public function show(Post $post)
     {
         return view('blogPosts.single-blog-post', compact('post'));
     }
-    public function delete(Post $post)
+    // for delete single post
+    public function destroy(Post $post)
     {
        $post->delete();
        return redirect()->back()->with('status', 'Post delete successfully');
