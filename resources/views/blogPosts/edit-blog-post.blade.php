@@ -10,12 +10,10 @@
     <section id="contact-us">
         <h1 style="padding-top: 50px;">Edit Post!</h1>
 
-        @if (session('status'))
-        <p>{{ session('status') }}</p>
-        @endif
+        @include('includes.flash-message')
         {{-- contact form --}}
         <div class="contact-form">
-            <form action="{{ route('blog.store', $post) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('blog.update', $post) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 {{-- Title --}}

@@ -20,11 +20,11 @@
                                 font-size: 26px;
                                 display: inline-block;
                                 margin: 2px 0;">Create Post</a></li>
-                            <li><a href="" style=" all: revert;
+                            <li><a href="{{ route('categories.create') }}" style=" all: revert;
                                 font-size: 26px;
                                 display: inline-block;
                                 margin: 2px 0;">Create Category</a></li>
-                            <li><a href="" style=" all: revert;
+                            <li><a href="{{ route('categories.index') }}" style=" all: revert;
                                 font-size: 26px;
                                 display: inline-block;
                                 margin: 2px 0;">Category List</a></li>

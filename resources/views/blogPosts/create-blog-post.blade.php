@@ -10,9 +10,7 @@
     <section id="contact-us">
         <h1 style="padding-top: 50px;">Create New Post!</h1>
 
-        @if (session('status'))
-        <p>{{ session('status') }}</p>
-        @endif
+        @include('includes.flash-message')
         {{-- contact form --}}
         <div class="contact-form">
             <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
@@ -32,7 +30,18 @@
                 @error('image')
                 <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
                 @enderror
-
+                <!-- Drop down -->
+                <label for="categories"><span>Choose a category:</span></label>
+                <select name="category_id" id="categories">
+                    <option selected disabled>Select option </option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                {{-- The $attributeValue field is/must be $validationRule --}}
+                <p style="color: red; margin-bottom:25px;">{{ $message }}</p>
+                @enderror
                 {{-- Body --}}
                 <label for="body"><span>Body</span></label>
                 <textarea id="body" name="body">{{ old('body') }}</textarea>

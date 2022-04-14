@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,16 +22,21 @@ class BlogController extends Controller
         if ($request->search) {
             $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->paginate(4);
         }
+        elseif($request->category){
+            $posts = Category::where('name', $request->category)->firstOrFail()->posts()->paginate(4)->withQueryString();
+        }
         else{
             
             $posts = Post::latest()->paginate(4);
         }
-        return view('blogPosts.blog', compact('posts'));
+        $categories = Category::all();
+        return view('blogPosts.blog', compact('posts', 'categories'));
     }
     // for create single post
     public function create()
     {
-        return view('blogPosts.create-blog-post');
+        $categories = Category::all();
+        return view('blogPosts.create-blog-post', compact('categories'));
     }
         // for store single post
     public function store(Request $request)
@@ -38,12 +44,19 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'image' => 'required | image',
+            'category_id' => 'required',
             'body' => 'required'
         ]);
         // add post id with slug for make it unique
-        $postId = Post::latest()->take(1)->first()->id +1;
+        if (Post::latest()->first() !== null) {
+            $postId = Post::latest()->first()->id +1;
+        }
+        else{
+            $postId = 1;
+        }
 
         $title = $request->input('title');
+        $category_id = $request->input('category_id');
         $slug = Str::slug($title, '-') . '-' . $postId;;
         $user_id = Auth::user()->id;
         $body = $request->input('body');
@@ -53,6 +66,7 @@ class BlogController extends Controller
 
         $post = new Post();
         $post->title = $title;
+        $post->category_id = $category_id;
         $post->slug = $slug;
         $post->user_id = $user_id;
         $post->imagePath = $imagePath;
@@ -83,7 +97,7 @@ class BlogController extends Controller
         ]);
         $postId = $post->id ;
         $title = $request->input('title');
-        $slug = Str::slug($title, '-') . '-' . $postId;;
+        $slug = Str::slug($title, '-') . '-' . $postId;
         $body = $request->input('body');
 
         // file upload
