@@ -28,6 +28,8 @@ Route::get('/about', function(){
 })->name('about');
 //to contact page
 Route::get('/contact',[ContactController::class,'index'])->name('contact.index');
+//to store contact page
+Route::post('/contact',[ContactController::class,'store'])->name('contact.store');
 
 // category resource controller
 Route::resource('/categories',CategoryController::class);
