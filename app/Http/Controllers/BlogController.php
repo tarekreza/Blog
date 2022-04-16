@@ -23,7 +23,7 @@ class BlogController extends Controller
             $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->paginate(4);
         }
         elseif($request->category){
-            $posts = Category::where('name', $request->category)->firstOrFail()->posts()->paginate(4)->withQueryString();
+            $posts = Category::where('name', $request->category)->firstOrFail()->posts()->paginate(4)->withQueryString();//withQueryString for change page with page number
         }
         else{
             
@@ -122,7 +122,9 @@ class BlogController extends Controller
         // for show single post
     public function show(Post $post)
     {
-        return view('blogPosts.single-blog-post', compact('post'));
+        $category = $post->category;
+        $relatedPosts = $category->posts()->where('id', '!=', $post->id)->latest()->take(3)->get();
+        return view('blogPosts.single-blog-post', compact('post','relatedPosts'));
     }
     // for delete single post
     public function destroy(Post $post)
