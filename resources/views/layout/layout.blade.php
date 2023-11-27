@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home - Alphayo Blog</title>
+    <title>{{ isset($title)? $title : "Tarek's Blog" }}</title>
     <!-- Css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <!-- Font awesome -->
@@ -22,7 +22,7 @@
         <!-- sidebar -->
         <div class="sidebar">
             <span class="closeButton">&times;</span>
-            <p class="brand-title"><a href="">Alphayo Blog</a></p>
+            <p class="brand-title"><a href="{{ route('welcome.index') }}">Tarek's Blog</a></p>
 
             <div class="side-links">
                 <ul>
@@ -47,12 +47,13 @@
             <!-- sidebar footer -->
             <footer class="sidebar-footer">
                 <div>
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href="https://web.facebook.com/muhammadtarekreza/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/muhammadtarekreza/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/tarek_reza" target="_blank"><i class="fab fa-twitter"></i></a>
                 </div>
 
-                <small>&copy 2021 Alphayo Blog</small>
+                <small>&copy {{ date("Y") }} Tarek's Blog. All rights reserved.</small><br>
+                <small>Developed by <a href="https://tarekreza.com/">Tarek Reza</a></small>
             </footer>
         </div>
         <!-- Menu Button -->
@@ -67,14 +68,14 @@
         <!-- Main footer -->
         <footer class="main-footer">
             <div>
-                <a href=""><i class="fab fa-facebook-f"></i></a>
-                <a href=""><i class="fab fa-instagram"></i></a>
-                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href="https://web.facebook.com/muhammadtarekreza/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/muhammadtarekreza/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/tarek_reza" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
-            <small>&copy 2021 Alphayo Blog</small>
+            <small>&copy {{ date("Y") }} Tarek's Blog. All rights reserved.</small><br>
+            <small>Developed by <a href="https://tarekreza.com/">Tarek Reza</a></small>
         </footer>
     </div>
-
     <!-- Click events to menu and close buttons using javaascript-->
     <script>
         document

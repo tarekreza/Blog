@@ -14,25 +14,25 @@
                 <div class="specific-info">
                     <i class="fas fa-home"></i>
                     <div>
-                        <p class="title">4th floor, Hi Center</p>
-                        <p class="subtitle">Moi Avenue</p>
+                        <p class="title">Basupara main road</p>
+                        <p class="subtitle">Khulna, Bangladesh</p>
                     </div>
                 </div>
                 <div class="specific-info">
                     <i class="fas fa-phone-alt"></i>
                     <div>
-                        <a href="">+254 720 XXX XXX </a>
+                        <a href="">+880 194 433 2851 </a>
                         <br />
-                        <a href="">+254 721 XXX XXX</a>
+                        <a href="">+880 162 687 8568</a>
 
-                        <p class="subtitle">Mon to Fri 9am-6pm</p>
+                        <p class="subtitle">Sat to Thu 9am-5pm</p>
                     </div>
                 </div>
                 <div class="specific-info">
                     <i class="fas fa-envelope-open-text"></i>
                     <div>
-                        <a href="mailto:info@alphayo.co.ke">
-                            <p class="title">info@alphayo.co.ke</p>
+                        <a href="mailto:tarekreza15@gmail.com">
+                            <p class="title">tarekreza15@gmail.com</p>
                         </a>
                         <p class="subtitle">Send us your query anytime!</p>
                     </div>

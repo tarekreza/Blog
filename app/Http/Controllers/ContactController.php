@@ -10,7 +10,8 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact');
+        $title = "Contact - Tarek's Blog";
+        return view('contact',compact('title'));
     }
     public function store(Request $request)
     {

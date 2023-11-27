@@ -24,7 +24,8 @@ Route::put('/blog/{post}',[BlogController::class,'update'])->name('blog.update')
 Route::delete('/blog/{post}',[BlogController::class,'destroy'])->name('blog.destroy');
 //to about page
 Route::get('/about', function(){
-    return view('about');
+    $title = "About - Tarek's Blog";
+    return view('about',compact('title'));
 })->name('about');
 //to contact page
 Route::get('/contact',[ContactController::class,'index'])->name('contact.index');
