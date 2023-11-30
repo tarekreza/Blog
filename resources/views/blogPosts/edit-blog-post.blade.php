@@ -1,14 +1,28 @@
-@extends('layout.layout')
+{{-- @extends('layout.layout') --}}
 
-@section('head')
+{{-- @section('head') --}}
 {{-- for html editor --}}
-<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
-@endsection
+{{-- <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script> --}}
+{{-- @endsection --}}
 
-@section('main')
+{{-- @section('main') --}}
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Edit Post
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+
+
+
 <main class="container" style="background-color: #fff;">
     <section id="contact-us">
-        <h1 style="padding-top: 50px;">Edit Post!</h1>
 
         @include('includes.flash-message')
         {{-- contact form --}}
@@ -46,11 +60,21 @@
         </div>
     </section>
 </main>
-@endsection
 
-@section('scripts')
+
+</div>
+</div>
+</div>
 {{-- for html editor --}}
 <script>
+CKEDITOR.replace('body');
+</script>
+</x-app-layout>
+{{-- @endsection --}}
+
+{{-- @section('scripts') --}}
+{{-- for html editor --}}
+{{-- <script>
     CKEDITOR.replace( 'body' );
 </script>
-@endsection
+@endsection --}}

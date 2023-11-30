@@ -22,6 +22,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('blog.create')" :active="request()->routeIs('blog.create')">
+                        Create Post
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                         Categories
                     </x-nav-link>
@@ -86,6 +91,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('blog.create')" :active="request()->routeIs('categories.index')">
+               Create Post
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                Categories

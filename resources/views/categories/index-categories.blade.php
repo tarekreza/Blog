@@ -1,29 +1,52 @@
-@extends('layout.layout')
-@section('head')
-  <!-- Css -->
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-  @endsection
-@section('main')
-    <div class="categories-list">
-        <h1>Categories List</h1>
-        {{-- @include('includes.flash-message') --}}
-        @include('includes.flash-message')
-        
-        @foreach ($categories as $category)
-            <div class="item">
-                <p>{{ $category->name }}</p>
-                <div>
-                    <a href="{{ route('categories.edit', $category) }}">Edit</a>
+{{-- @extends('layout.layout')
+@section('head') --}}
+<!-- Css -->
+
+{{-- @endsection --}}
+{{-- @section('main') --}}
+
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Categories
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+
+                    <div class="categories-list">
+                        {{-- <h1>Categories List</h1> --}}
+                        {{-- @include('includes.flash-message') --}}
+                        @include('includes.flash-message')
+
+
+                        <a href="{{ route('categories.create') }}" style="float:right" class="button btn-primary">Create
+                            category</a>
+
+
+                        @foreach ($categories as $category)
+                            <div class="item">
+                                <p>{{ $category->name }}</p>
+                                <div>
+                                    <a href="{{ route('categories.edit', $category) }}" class="button">Edit</a>
+                                </div>
+                                <form action="{{ route('categories.destroy', $category) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <input type="submit" value="Delete" class="button btn-danger">
+                                </form>
+                            </div>
+                        @endforeach
+                        <div class="index-categories">
+                            <a href="{{ route('categories.create') }}">Create category<span>&#8594;</span></a>
+                        </div>
+                    </div>
                 </div>
-                <form action="{{route('categories.destroy', $category)}}" method="post">
-                    @method('delete')
-                    @csrf
-                    <input type="submit" value="Delete">
-                </form>
             </div>
-        @endforeach
-        <div class="index-categories">
-            <a href="{{ route('categories.create') }}">Create category<span>&#8594;</span></a>
         </div>
-    </div>
-@endsection
+</x-app-layout>
+
+{{-- @endsection --}}

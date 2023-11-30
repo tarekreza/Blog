@@ -171,6 +171,30 @@ footer small {
   display: none;
 }
 
+/* Button */
+.button{
+  color: white;
+  border-radius: 6px;
+  padding: 6px 13px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.button:hover{
+  opacity:.80;
+
+}
+.btn-primary{
+  background-color: #5133a6;
+}
+.btn-success{
+  background-color: #5133a6;
+}
+.btn-danger{
+  background-color: red;
+}
+
+
 /* Blog Styles */
 
 .searchbar {
@@ -193,7 +217,7 @@ footer small {
 
 /* Categories list */
 .categories-list {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: #fff;
 }
 
@@ -227,16 +251,6 @@ footer small {
   color: #fff;
   font-size: 14px;
   display: inline-block;
-}
-
-.categories-list .item input {
-  padding: 6px 13px;
-  background-color: red;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  font-size: 14px;
 }
 
 .categories ul li {
