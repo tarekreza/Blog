@@ -14,6 +14,10 @@ module.exports = {
             },
         },
     },
-
+    variants: {
+        extend: {
+          translate: ['hover', 'focus'], // enable hover and focus variants for translate
+        },
+      },
     plugins: [require('@tailwindcss/forms')],
 };

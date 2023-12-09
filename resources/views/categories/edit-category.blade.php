@@ -22,8 +22,12 @@
 
 
                     <main class="container" style="background-color: #fff;">
-                        <section id="contact-us">
+                        <div class="flex justify-end">
 
+                            <p class="duration-300 hover:-translate-y-1 "><a href="{{ route('categories.index') }}"
+                                    class=" p-3 bg-black text-white rounded-lg text-sm">Categories list</a></p>
+                        </div>
+                        <section id="contact-us">
 
                             @include('includes.flash-message')
                             {{-- contact form --}}
@@ -42,9 +46,6 @@
                                     {{-- Button --}}
                                     <input type="submit" value="submit" />
                                 </form>
-                            </div>
-                            <div class="create-categories">
-                                <a href="{{ route('categories.index') }}">Categories list <span>&#8594</span></a>
                             </div>
                         </section>
                     </main>
