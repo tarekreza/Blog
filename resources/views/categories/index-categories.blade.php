@@ -36,13 +36,13 @@
                                 <p>{{ $category->name }}</p>
                                 <div>
                                     <a href="{{ route('categories.edit', $category) }}"
-                                        class="p-3 bg-green-600 text-white rounded-lg text-sm ">Edit</a>
+                                        class="p-3 hover:opacity-80 bg-green-600 text-white rounded-lg text-sm ">Edit</a>
                                 </div>
                                 <form action="{{ route('categories.destroy', $category) }}" method="post">
                                     @method('delete')
                                     @csrf
                                     <input type="submit" value="Delete"
-                                        class="px-3 py-2 bg-red-600 text-white rounded-lg text-sm cursor-pointer">
+                                        class="px-3 py-2 hover:opacity-80 bg-red-600 text-white rounded-lg text-sm cursor-pointer">
                                 </form>
                             </div>
                         @endforeach

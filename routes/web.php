@@ -14,6 +14,8 @@ Route::get('/blog',[BlogController::class,'index'])->name('blog.index');
 Route::get('/blog/create',[BlogController::class,'create'])->name('blog.create')->middleware('auth');
 // to store blog post
 Route::post('/blog',[BlogController::class,'store'])->name('blog.store');
+//list of blog post of authenicated user
+Route::get('/blog/my-posts',[BlogController::class,'myPosts'])->name('blog.myPosts')->middleware('auth');
 //to single blog post
 Route::get('/blog/{post:slug}',[BlogController::class,'show'])->name('blog.show');
 //to edit single blog post

@@ -74,8 +74,15 @@ class BlogController extends Controller
 
         $post->save();
 
-        return redirect()->back()->with('status', 'Post created successfully');
+        return redirect()->route('blog.myPosts')->with('status', 'Post created successfully');
     }
+    // for show auth user posts
+    public function myPosts()
+    {
+        $posts = Post::where('user_id', Auth::user()->id)->latest()->get();
+        return view('blogPosts.my-posts', compact('posts'));
+    }
+
         // for edit single post
     public function edit(Post $post)
     {
@@ -92,7 +99,6 @@ class BlogController extends Controller
         }
         $request->validate([
             'title' => 'required',
-            'image' => 'required | image',
             'body' => 'required'
         ]);
         $postId = $post->id ;
@@ -101,7 +107,12 @@ class BlogController extends Controller
         $body = $request->input('body');
 
         // file upload
-        $imagePath = 'storage/' . $request->file('image')->store('postsImages', 'public');
+        if ($request->file('image')) {
+            $imagePath = 'storage/' . $request->file('image')->store('postsImages', 'public');
+        }
+        else{
+            $imagePath = $post->imagePath;
+        }
 
         $post->title = $title;
         $post->slug = $slug;

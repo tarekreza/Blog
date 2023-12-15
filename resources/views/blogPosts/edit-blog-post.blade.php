@@ -21,54 +21,55 @@
 
 
 
-<main class="container" style="background-color: #fff;">
-    <section id="contact-us">
+                    <main class="container" style="background-color: #fff;">
+                        <section id="contact-us">
 
-        @include('includes.flash-message')
-        {{-- contact form --}}
-        <div class="contact-form">
-            <form action="{{ route('blog.update', $post) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('put')
-                {{-- Title --}}
-                <label for="title"><span>Title</span></label>
-                <input type="text" id="title" name="title" value="{{ $post->title }}" />
-                {{-- title validation --}}
-                @error('title')
-                <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
-                @enderror
+                            @include('includes.flash-message')
+                            {{-- contact form --}}
+                            <div class="contact-form">
+                                <form action="{{ route('blog.update', $post) }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
+                                    {{-- Title --}}
+                                    <label for="title"><span>Title</span></label>
+                                    <input type="text" id="title" name="title" value="{{ $post->title }}" />
+                                    {{-- title validation --}}
+                                    @error('title')
+                                        <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
+                                    @enderror
 
-                {{-- Image --}}
-                <label for="image"><span>Image</span></label>
-                <input type="file" id="image" name="image" />
-                {{-- image validation --}}
-                @error('image')
-                <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
-                @enderror
+                                    {{-- Image --}}
+                                    <label for="image"><span>Image</span></label>
+                                    <input type="file" id="image" name="image" />
+                                    {{-- image validation --}}
+                                    @error('image')
+                                        <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
+                                    @enderror
 
-                {{-- Body --}}
-                <label for="body"><span>Body</span></label>
-                <textarea id="body" name="body">{{ $post->body }}</textarea>
-                {{-- body validation --}}
-                @error('body')
-                <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
-                @enderror
+                                    {{-- Body --}}
+                                    <label for="body"><span>Body</span></label>
+                                    <textarea id="body" name="body">{{ $post->body }}</textarea>
+                                    {{-- body validation --}}
+                                    @error('body')
+                                        <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
+                                    @enderror
 
-                {{-- Button --}}
-                <input type="submit" value="submit" />
-            </form>
+                                    {{-- Button --}}
+                                    <input type="submit" value="submit" />
+                                </form>
+                            </div>
+                        </section>
+                    </main>
+
+
+                </div>
+            </div>
         </div>
-    </section>
-</main>
-
-
-</div>
-</div>
-</div>
-{{-- for html editor --}}
-<script>
-CKEDITOR.replace('body');
-</script>
+        {{-- for html editor --}}
+        <script>
+            CKEDITOR.replace('body');
+        </script>
 </x-app-layout>
 {{-- @endsection --}}
 

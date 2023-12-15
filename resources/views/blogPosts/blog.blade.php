@@ -29,7 +29,7 @@
     @forelse ($posts as $post)
     {{-- if there is no post in $post then execute @empty --}}
     <div class="card-blog-content">
-      @auth
+      {{-- @auth
       @if (auth()->user()->id === $post->user->id)
       <div class="post-buttons">
         <a href="{{ route('blog.edit', $post) }}">Edit</a>
@@ -40,7 +40,7 @@
         </form>
       </div>
       @endif
-      @endauth
+      @endauth --}}
 
       <img src="{{ asset($post->imagePath) }}" alt="" />
       <p>
