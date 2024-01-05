@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\UserController;
 
 // to welcome page
 Route::get('/',[WelcomeController::class,'index'])->name('welcome.index');
@@ -34,8 +36,34 @@ Route::get('/contact',[ContactController::class,'index'])->name('contact.index')
 //to store contact page
 Route::post('/contact',[ContactController::class,'store'])->name('contact.store');
 
-// category resource controller
-Route::resource('/categories',CategoryController::class);
+Route::middleware(['auth'])->group(function(){
+    // category resource controller
+    Route::resource('/categories',CategoryController::class);
+    //to assign role to user
+    Route::get('/role-permission',[RolePermissionController::class,'index'])->name('role-permission.index');
+    //to show all roles and permissions
+    Route::get('/role-permission/show',[RolePermissionController::class,'create'])->name('role-permission.showAllRolesAndPermissions');
+    //to assign permission to role
+    Route::post('/role-permission',[RolePermissionController::class,'store'])->name('role-permission.addPermissionToRole');
+    //role permission edit
+    Route::get('/role-permission/{role}/edit',[RolePermissionController::class,'edit'])->name('role-permission.edit');
+    //role permission update
+    Route::put('/role-permission/{role}',[RolePermissionController::class,'update'])->name('role-permission.update');
+    //role permission delete
+    Route::delete('/role-permission/{role}',[RolePermissionController::class,'destroy'])->name('role-permission.destroy');
+    //show all users
+    Route::get('/users',[UserController::class,'index'])->name('users.index');
+    //create user
+    Route::get('/users/create',[UserController::class,'create'])->name('users.create');
+    //store user
+    Route::post('/users',[UserController::class,'store'])->name('users.store');
+    //edit user
+    Route::get('/users/{user}/edit',[UserController::class,'edit'])->name('users.edit');
+    //update user
+    Route::put('/users/{user}',[UserController::class,'update'])->name('users.update');
+    //delete user
+    Route::delete('/users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+});
 
 
 //to dashboard

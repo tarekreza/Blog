@@ -26,11 +26,28 @@
                         Posts
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        Categories
-                    </x-nav-link>
-                </div>
+                @can('View Category')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                            Categories
+                        </x-nav-link>
+                    </div>
+                @endcan
+                @can('View Role')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('role-permission.index')" :active="request()->routeIs('role-permission.index')">
+                            Role
+                        </x-nav-link>
+                    </div>
+                @endcan
+
+                @can('View User')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            Users
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->
@@ -93,11 +110,23 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('blog.myPosts')" :active="request()->routeIs('blog.myPosts')">
-            Posts
+                Posts
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-               Categories
-            </x-responsive-nav-link>
+            @can('View Category')
+                <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                    Categories
+                </x-responsive-nav-link>
+            @endcan
+            @can('View Role')
+                <x-responsive-nav-link :href="route('role-permission.index')" :active="request()->routeIs('role-permission.index')">
+                    Role
+                </x-responsive-nav-link>
+            @endcan
+            @can('View User')
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    Users
+                </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

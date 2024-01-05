@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:View Category')->only(['index']);
+        $this->middleware('permission:Create Category')->only('create','store');
+        $this->middleware('permission:Edit Category')->only('edit','update');
+        $this->middleware('permission:Delete Category')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // $this->middleware(['permission:View Category']);
         $categories = Category::all();
         return view('categories.index-categories',compact('categories'));
     }
@@ -54,7 +63,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        //return 404 page
+        abort(404);
     }
 
     /**
