@@ -64,7 +64,7 @@
                                     @enderror
 
                                     {{-- Button --}}
-                                    <input style="margin-top: 16px" type="submit" value="submit" />
+                                    <input style="margin-top: 16px" type="submit" value="Submit" />
                                 </form>
                             </div>
                         </section>

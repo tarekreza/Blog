@@ -46,7 +46,18 @@
                                     @error('image')
                                         <p style="color: red; margin-bottom: 25px">{{ $message }}</p>
                                     @enderror
-
+                                    <!-- Drop down -->
+                                    <label for="categories"><span>Choose a category:</span></label>
+                                    <select name="category_id" id="categories">
+                                        <option selected disabled>Select option </option>
+                                        @foreach ($categories as $category)
+                                            <option {{ $category->id == $post->category_id ? 'selected' : '' }}
+                                                value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <p style="color: red; margin-bottom:25px;">{{ $message }}</p>
+                                    @enderror
                                     {{-- Body --}}
                                     <label for="body"><span>Body</span></label>
                                     <textarea id="body" name="body">{{ $post->body }}</textarea>
@@ -56,7 +67,7 @@
                                     @enderror
 
                                     {{-- Button --}}
-                                    <input type="submit" value="submit" />
+                                    <input type="submit" value="Submit" />
                                 </form>
                             </div>
                         </section>

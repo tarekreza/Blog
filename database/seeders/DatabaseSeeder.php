@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(PermissionsTableSeeder::class);
         $this->call(RoleTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
         $user = User::updateOrCreate([
-            'name' => 'Admin',
+            'name' => 'Tarek',
             'email' => 'admin@gmail.com',
             // password is already hashed in User model
             'password' => '11111111',
         ]);
         $user->assignRole('Admin');
+        $this->call(PostTableSeeder::class);
     }
 }

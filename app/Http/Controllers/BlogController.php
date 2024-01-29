@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -21,12 +22,10 @@ class BlogController extends Controller
         //for search and pagination
         if ($request->search) {
             $posts = Post::where('title', 'like', '%' . $request->search . '%')->orWhere('body', 'like', '%' . $request->search . '%')->latest()->paginate(4);
-        }
-        elseif($request->category){
-            $posts = Category::where('name', $request->category)->firstOrFail()->posts()->paginate(4)->withQueryString();//withQueryString for change page with page number
-        }
-        else{
-            
+        } elseif ($request->category) {
+            $posts = Category::where('name', $request->category)->firstOrFail()->posts()->paginate(4)->withQueryString(); //withQueryString for change page with page number
+        } else {
+
             $posts = Post::latest()->paginate(4);
         }
         $categories = Category::all();
@@ -38,20 +37,19 @@ class BlogController extends Controller
         $categories = Category::all();
         return view('blogPosts.create-blog-post', compact('categories'));
     }
-        // for store single post
+    // for store single post
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'required | image',
+            'image' => 'required | mimes: jpeg,jpg,png| max:2048',
             'category_id' => 'required',
             'body' => 'required'
         ]);
         // add post id with slug for make it unique
         if (Post::latest()->first() !== null) {
-            $postId = Post::latest()->first()->id +1;
-        }
-        else{
+            $postId = Post::latest()->first()->id + 1;
+        } else {
             $postId = 1;
         }
 
@@ -62,8 +60,9 @@ class BlogController extends Controller
         $body = $request->input('body');
 
         // file upload
-        $imagePath = 'storage/' . $request->file('image')->store('postsImages', 'public');
+        $imagePath = $request->file('image')->store('postsImages', 'public');
 
+        //store in database
         $post = new Post();
         $post->title = $title;
         $post->category_id = $category_id;
@@ -83,34 +82,42 @@ class BlogController extends Controller
         return view('blogPosts.my-posts', compact('posts'));
     }
 
-        // for edit single post
+    // for edit single post
     public function edit(Post $post)
     {
-        if(auth()->user()->id !== $post->user->id){
+        if (auth()->user()->id !== $post->user->id) {
             abort(403);
         }
-        return view('blogPosts.edit-blog-post', compact('post'));
+        $categories = Category::all();
+        return view('blogPosts.edit-blog-post', compact('post','categories'));
     }
-        // for update single post
-    public function update(Request $request , Post $post)
+    // for update single post
+    public function update(Request $request, Post $post)
     {
-        if(auth()->user()->id !== $post->user->id){
+        if (auth()->user()->id !== $post->user->id) {
             abort(403);
         }
         $request->validate([
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'category_id' => 'required',
+
         ]);
-        $postId = $post->id ;
+        if ($request->file('image')) {
+            $request->validate([
+            'image' => 'required | mimes: jpeg,jpg,png| max:2048',
+            ]);
+        }
+        $postId = $post->id;
         $title = $request->input('title');
         $slug = Str::slug($title, '-') . '-' . $postId;
         $body = $request->input('body');
+        $category_id = $request->input('category_id');
 
         // file upload
         if ($request->file('image')) {
-            $imagePath = 'storage/' . $request->file('image')->store('postsImages', 'public');
-        }
-        else{
+            $imagePath = $request->file('image')->store('postsImages', 'public');
+        } else {
             $imagePath = $post->imagePath;
         }
 
@@ -118,6 +125,8 @@ class BlogController extends Controller
         $post->slug = $slug;
         $post->imagePath = $imagePath;
         $post->body = $body;
+        $post->category_id = $category_id;
+
 
         $post->save();
 
@@ -130,17 +139,19 @@ class BlogController extends Controller
     // }
 
     // Route model binding
-        // for show single post
+    // for show single post
     public function show(Post $post)
     {
         $category = $post->category;
         $relatedPosts = $category->posts()->where('id', '!=', $post->id)->latest()->take(3)->get();
-        return view('blogPosts.single-blog-post', compact('post','relatedPosts'));
+        return view('blogPosts.single-blog-post', compact('post', 'relatedPosts'));
     }
     // for delete single post
     public function destroy(Post $post)
     {
-       $post->delete();
-       return redirect()->back()->with('status', 'Post delete successfully');
+        Storage::delete('public/' . $post->imagePath);
+        $post->delete();
+
+        return redirect()->back()->with('status', 'Post delete successfully');
     }
 }
