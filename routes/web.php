@@ -29,7 +29,7 @@ Route::put('/blog/{post}', [BlogController::class, 'update'])->name('blog.update
 Route::delete('/blog/{post}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
 //to store comment
-Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment.store');
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment.store')->middleware('auth');
 
 //to about page
 Route::get('/about', function () {
