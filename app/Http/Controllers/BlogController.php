@@ -142,6 +142,7 @@ class BlogController extends Controller
     // for show single post
     public function show(Post $post)
     {
+        $post->load('comments');
         $category = $post->category;
         $relatedPosts = $category->posts()->where('id', '!=', $post->id)->latest()->take(3)->get();
         return view('blogPosts.single-blog-post', compact('post', 'relatedPosts'));

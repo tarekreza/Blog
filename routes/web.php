@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RolePermissionController;
-use App\Http\Controllers\UserController;
 
 // to welcome page
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
@@ -26,6 +27,10 @@ Route::get('/blog/{post}/edit', [BlogController::class, 'edit'])->name('blog.edi
 Route::put('/blog/{post}', [BlogController::class, 'update'])->name('blog.update');
 //to delete single blog post
 Route::delete('/blog/{post}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
+//to store comment
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment.store');
+
 //to about page
 Route::get('/about', function () {
     $title = "About - Tarek's Blog";

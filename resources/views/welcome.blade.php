@@ -22,7 +22,7 @@
     @foreach ($posts as $post)
           
         <div class="card-blog-content">
-          <img src="{{ asset($post->imagePath) }}" alt="" />
+          <img src="{{ asset('storage/'.$post->imagePath) }}" alt="" />
           <p>
             {{ $post->created_at->diffForHumans() }}
             <span>Written By {{ $post->user->name }}</span>

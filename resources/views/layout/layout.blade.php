@@ -8,6 +8,9 @@
     <title>{{ isset($title)? $title : "Tarek's Blog" }}</title>
     <!-- Css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <!--tailwind css --> 
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
