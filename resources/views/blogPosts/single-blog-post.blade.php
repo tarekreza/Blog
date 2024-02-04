@@ -54,8 +54,16 @@
                         </div>
                     </div>
                     <div class="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-                        <p class="mb-2 text-gray-400">{{ $comment->body }}</p>
+                        <p class=" text-gray-400">{{ $comment->body }}</p>
                     </div>
+                    
+                    @if(Auth::check() && (Auth::user()->id == $comment->user_id || Auth::user()->hasRole('Admin')))
+                        <form class="flex items-center justify-end mb-2 text-red-500" method="POST" action="{{ route('comment.destroy', $comment) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    @endif
                 </article>
             @endforeach
 

@@ -30,6 +30,8 @@ Route::delete('/blog/{post}', [BlogController::class, 'destroy'])->name('blog.de
 
 //to store comment
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+//to delete comment
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy')->middleware('checkCommentOwner');
 
 //to about page
 Route::get('/about', function () {
