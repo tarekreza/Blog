@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 
 // to welcome page
@@ -70,11 +71,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     //delete user
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    //to dashboard
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    //to show profile
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+    //to profile
+    Route::get('/profile', [ProfileController::class,'edit'])->name('profile');
+    //to update profile
+    Route::put('/profile', [ProfileController::class,'update'])->name('profile.update');
 });
 
-
-//to dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 require __DIR__ . '/auth.php';
