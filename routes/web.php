@@ -9,6 +9,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
+use App\Models\Post;
 
 // to welcome page
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
@@ -73,7 +74,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     //to dashboard
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = auth()->user();
+        $posts = Post::where('user_id', $user->id)->with('comments')->get();
+        $postCount = $posts->count();
+        $commentCount = $posts->sum(function ($post) {
+            return $post->comments->count();
+        });
+                
+        return view('dashboard',compact('postCount','commentCount'));
     })->name('dashboard');
     //to show profile
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

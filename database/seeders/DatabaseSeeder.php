@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         $user = User::updateOrCreate([
             'name' => 'Tarek',
             'email' => 'admin@gmail.com',
+            'bio' => 'I am a web developer',
+            'profile_picture_path' => 'profilePictures/avatar.jpg',
             // password is already hashed in User model
             'password' => '11111111',
         ]);

@@ -18,7 +18,7 @@
         <!-- blog posts section -->
         <h2 class="mt-10 mb-5 text-3xl font-bold text-white">Blog Posts</h2>
         <section class="flex justify-center lg:justify-start flex-wrap ">
-            @forelse ($user->post as $post)
+            @forelse ($user->posts as $post)
                 <div class="max-w-sm mr-3 mb-3  border  rounded-lg shadow bg-zinc-900 border-zinc-700">
                     <a href="{{ route('blog.show', $post->slug) }}">
                         <img class="w-full h-48 object-cover rounded-t-lg " src="{{ asset('storage/' . $post->imagePath) }}" alt="" />
