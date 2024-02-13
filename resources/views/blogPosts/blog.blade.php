@@ -42,7 +42,7 @@
       @endif
       @endauth --}}
 
-      <img src="{{ asset('storage/'.$post->imagePath) }}" alt="" />
+      <img class="sm:h-96 h-72  w-full object-cover" src="{{ asset('storage/'.$post->imagePath) }}" alt="Feature Image" />
       <p>
         {{ $post->created_at->diffForHumans() }}
         <span>Written By {{ $post->user->name }}</span>

@@ -2,10 +2,10 @@
 <!-- header -->
 @section('header')
 
-<header class="header" style="background-image: url({{ asset("images/photography.jpg") }});">
+<header class="header" style="background-image: url({{ asset("images/home.jpg") }});">
   <div class="header-text">
-    <h1>Tarek's Blog</h1>
-    <h4>Dashboard of verified news...</h4>
+    <h1>Dev Dynamo Sphere</h1>
+    <h4>Fueling Your Journey in Tech and Personal Development...</h4>
   </div>
   <div class="overlay"></div>
 </header>
@@ -22,7 +22,7 @@
     @foreach ($posts as $post)
           
         <div class="card-blog-content">
-          <img src="{{ asset('storage/'.$post->imagePath) }}" alt="" />
+          <img class="sm:h-96 h-72  w-full object-cover" src="{{ asset('storage/'.$post->imagePath) }}" alt="" />
           <p>
             {{ $post->created_at->diffForHumans() }}
             <span>Written By {{ $post->user->name }}</span>

@@ -19,13 +19,23 @@
 </head>
 
 <body>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7L431MHN2M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7L431MHN2M');
+</script>
+
     <div id="wrapper">
         <!-- header -->
         @yield('header')
         <!-- sidebar -->
         <div class="sidebar">
             <span class="closeButton">&times;</span>
-            <p class="brand-title"><a href="{{ route('welcome.index') }}">Tarek's Blog</a></p>
+            <p class="brand-title"><a href="{{ route('welcome.index') }}">Dev Dynamo Sphere</a></p>
 
             <div class="side-links">
                 <ul>
@@ -55,7 +65,7 @@
                     <a href="https://twitter.com/tarek_reza" target="_blank"><i class="fab fa-twitter"></i></a>
                 </div>
 
-                <small>&copy {{ date("Y") }} Tarek's Blog. All rights reserved.</small><br>
+                <small>&copy {{ date("Y") }} Dev Dynamo Sphere. All rights reserved.</small><br>
                 <small>Developed by <a href="https://tarekreza.com/">Tarek Reza</a></small>
             </footer>
         </div>
@@ -75,7 +85,7 @@
                 <a href="https://www.instagram.com/muhammadtarekreza/" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://twitter.com/tarek_reza" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
-            <small>&copy {{ date("Y") }} Tarek's Blog. All rights reserved.</small><br>
+            <small>&copy {{ date("Y") }} Dev Dynamo Sphere. All rights reserved.</small><br>
             <small>Developed by <a href="https://tarekreza.com/">Tarek Reza</a></small>
         </footer>
     </div>

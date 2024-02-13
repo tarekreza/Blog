@@ -1,10 +1,10 @@
 @extends('layout.layout')
 @section('head')
-    <title>{{ $post->title }}</title>
-    <meta name="description" content="{!! Str::limit($post->body, 20, '...') !!}">
+    <title>{{ $post->title }}</title>    
+    <meta name="description" content="{!! Str::limit($post->body, 30, '...') !!}">
     {{-- <meta name="description" content="{{ $post->excerpt }}"> --}}
     <meta property="og:title" content="{{ $post->title }}" />
-    <meta property="og:description" content="{!! Str::limit($post->body, 20, '...') !!}" />
+    <meta property="og:description" content="{!! Str::limit($post->body, 30, '...') !!}" />
     <meta property="og:image" content="{{ asset('storage/' . $post->imagePath) }}" />
     <meta property="og:url" content="{{ Request::fullUrl() }}" />
     <meta property="og:type" content="article" />
@@ -14,7 +14,7 @@
     <meta name="twitter:site" content="@yourtwitterhandle" />
     <meta name="twitter:creator" content="@yourtwitterhandle" />
     <meta name="twitter:title" content="{{ $post->title }}" />
-    <meta name="twitter:description" content="{!! Str::limit($post->body, 20, '...') !!}" />
+    <meta name="twitter:description" content="{!! Str::limit($post->body, 30, '...') !!}" />
     <meta name="twitter:image" content="{{ asset('storage/' . $post->imagePath) }}" />
     
     @endsection
